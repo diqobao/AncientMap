@@ -75,7 +75,7 @@
             <a id="drawTimeSeries" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">绘制时间序列图</a>
             <ul id="layerTree" class="easyui-tree" onlyLeafCheck="true" dnd="true">
                 <li id="layerFather">
-                    <span>图层</span>
+                    <span>Layers</span>
                     <ul></ul>
                 </li>
             </ul>
@@ -86,9 +86,9 @@
         <div class="easyui-accordion" data-options="fit:true,border:false">
             <div title="Search" style="padding:10px">
                 <label>Search：</label>
-                <input class="easyui-searchbox" data-options="prompt:'eg.浙江大学',searcher:geoCoder" style="width:100%">
+                <input class="easyui-searchbox" data-options="prompt:'eg.Shanghai',searcher:geoCoder" style="width:100%">
                 <input id="p_apiName" name="apiName" type="text" autocomplete="off" style="width:100px;height:20px;" onkeyup="autoComplete.start(event)">
-                <a id="search" href="#" class="easyui-linkbutton"  onclick="bgsearch()">搜索</a>
+                <a id="search" href="#" class="easyui-linkbutton"  onclick="bgsearch()">Search</a>
                 <div class="auto_hidden" style="height: auto;left:300px;position:absolute; background-color: #F0F0F0;font-size: 15pt;" id="auto"></div>
             </div>
             <div title="Navigation" style="padding:10px;" data-option= "selected:true">
@@ -184,7 +184,7 @@
     </div>
 </div>
 <!-- Create window from markup. -->
-<div id="loginWindow" class="easyui-window" title="User Logining" style="width:400px;height:190px;padding:5px"
+<div id="loginWindow" class="easyui-window" title="User Login" style="width:400px;height:190px;padding:5px"
      data-options="closed:false, headerCls:'wintitle',resizable:false,maximizable:false,iconCls:'icon-zju',cls:'c6'">
     <div class="easyui-layout" data-options = "fit:true">
         <div data-options="region:'center',border:false" style="padding:5px;background:#fff;border:1px solid #ccc;">

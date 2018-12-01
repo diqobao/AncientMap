@@ -2864,12 +2864,12 @@ $(document).ready(function() {
     var menu = new BMap.ContextMenu();
 
     var txtMenuItem = [{
-        text: '放大',
+        text: 'ZommIn',
         callback: function() {
             map.zoomIn()
         }
     }, {
-        text: '缩小',
+        text: 'ZoomOut',
         callback: function() {
             map.zoomOut()
         }
@@ -3118,11 +3118,11 @@ $(document).ready(function() {
             success: function(result){
                 if(result=="success"){
                     $('#loginWindow').window('close');
-                    $.messager.alert("提示","登录成功");
+                    $.messager.alert("Message","Success");
                     window.location.reload();
                 }
                 else{
-                    $.messager.alert("提示","用户名或者密码错误");
+                    $.messager.alert("Message","Wrong username or password");
                 }
             }
         })
@@ -3151,10 +3151,10 @@ $(document).ready(function() {
 	
 	                    $("#mapSelect").combobox('loadData',options);
 	                    $("#mapSelect").combobox('select', options[0].value);
-					 	$.messager.alert("提示","Map Loading Sucess!");
+					 	$.messager.alert("Message","Map Loading Sucess!");
 	                }
 	                else{
-	                    $.messager.alert("提示","You have not create any map!");
+	                    $.messager.alert("Message","You have not create any map!");
 	                }
             }
         })
@@ -3176,10 +3176,10 @@ $(document).ready(function() {
             },
             success: function(result){
                 if(result == "success"){
-                	 $.messager.alert("提示","保存成功");
+                	 $.messager.alert("Message","Save Success");
                 }
                 else{
-                    $.messager.alert("提示","保存失败");
+                    $.messager.alert("Message","Save Failed");
                 }
             }
         })
@@ -3212,10 +3212,10 @@ $(document).ready(function() {
                 			}
                 			
                 		}
-            			$.messager.alert("提示","图层树刷新成功");
+            			$.messager.alert("Message","图层树刷新成功");
             		}
             		else {
-            			$.messager.alert("提示","该地图下不存在图层");
+            			$.messager.alert("Message","该地图下不存在图层");
 					}
             		currentSeries = tmpSeries.slice(0);
                 	option.series = currentSeries;
@@ -3232,7 +3232,7 @@ $(document).ready(function() {
                 	option.series = currentSeries;
                 	myChart.setOption(option,true);
                 	resetBmap();
-                	$.messager.alert("提示","该地图图层信息未赋值");
+                	$.messager.alert("Message","该地图图层信息未赋值");
 				} 
             })
         }
@@ -3246,7 +3246,7 @@ $(document).ready(function() {
             else if (rec.text == "blue")
                 $("#easyuiTheme").attr("href", "./jquery-easyui-1.5.2/themes/default/easyui.css");
             else
-                alert("不存在的选项！！！");
+                alert("No choice");
         }
     });
     $('#loginWindow').window('close');
