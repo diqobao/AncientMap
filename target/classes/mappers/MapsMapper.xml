@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.am.dao.MapsMapper">
+	<update id="updateMaps" parameterType="com.am.pojo.Maps">
+		UPDATE MAPS
+		<set>
+			<if test="centerx != null"> CENTERX=#{centerx},</if>
+			<if test="centery != null">CENTERY=#{centery},</if>
+			<if test="zoomlevel != null">ZOOMLEVEL=#{zoomlevel},</if>
+			<if test="layertreejson != null">LAYERTREEJSON=#{layertreejson},</if>
+		</set>
+		<where>
+			USERID =#{userid} AND MAPNAME =#{mapname}
+		</where>
+	</update>
+	<select id="findMapsByUserid" parameterType="int" resultType="String">
+		SELECT MAPNAME FROM MAPS 
+		<where>
+		 	USERID=#{userid}
+		</where>
+	</select>
+	<select id="findLayerTreeByMaps" parameterType="com.am.pojo.Maps" resultType="String">
+		SELECT LAYERTREEJSON FROM MAPS 
+		<where>
+		 	USERID =#{userid} AND MAPNAME =#{mapname}
+		</where>
+	</select>
+</mapper>
