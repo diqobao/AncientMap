@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/spectrum.css">
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
-    <script typ e="text/javascript" src="./jquery-easyui-1.5.2/locale/easyui-lang-en.js"></script>
+    <script type="text/javascript" src="./jquery-easyui-1.5.2/locale/easyui-lang-en.js"></script>
     <script type="text/javascript" src="./js/echarts.js"></script>
     <script type="text/javascript" src="./js/bmap.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QI35PbXyYw28IT7FhGbtHIvE4GLfwDb2"></script>

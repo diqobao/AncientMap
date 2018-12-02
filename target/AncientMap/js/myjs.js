@@ -3338,7 +3338,7 @@ $(document).ready(function() {
 	                }
             }
         })
-    })
+    });
     //实现保存地图参数的功能，包括中心点(x/y),zoomlevel,basemap,layertreejson
     $('#save_map').bind('click',function(){
         $.ajax({
@@ -3371,13 +3371,13 @@ $(document).ready(function() {
                 }
             }
         })
-    })
+    });
 
     $('#upload').linkbutton({
         onClick:function(){
             $('#uploadWindow').window('open');
         }
-    })
+    });
     // var fileId= $("input[name='file']").attr("id");
 
     $('#upload_map').bind('click',function() {
@@ -3389,12 +3389,6 @@ $(document).ready(function() {
         }
         var fileName = file.name;
         var file_typename = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
-
-        var d = csvJSON(file)
-        $.messager.alert("Message0", JSON.stringify(d));
-        var qqq = convertData(d);
-        $.messager.alert("Message111", JSON.stringify(qqq));
-
 
         if (file_typename == '.csv') {
             var fileSize = 0;
@@ -3422,18 +3416,17 @@ $(document).ready(function() {
             // dataType: "json",
             success: function (result) {
                 if (result != "failed") {
-                    $.messager.alert("Message1", result);
-                    var j = JSON.parse(result);
-                    $.messager.alert("Message2", JSON.stringify(j));
-                    qqq = convertData(j);
-                    $.messager.alert("Message3", JSON.stringify(qqq));
+                    var jsonfile = JSON.parse(result);
+                    var output = convertData(jsonfile);
+                    // $.messager.alert("Message2", JSON.stringify(jsonfile));
+                    $.messager.alert("Message", "Upload Success");
                 } else {
                     $.messager.alert("Message", "Upload Failed");
                 }
             }
         });
 
-    })
+    });
 
     //更新选定地图的图层树
      $('#mapSelect').combobox({
@@ -4079,11 +4072,9 @@ function removeLayer(){
     });
 }
 
-<<<<<<< Updated upstream
 
 //autofill part.
 //TODO in the future
-=======
 // csv to json
 function csvJSON(csv){
     csv = csv + '';
@@ -4111,8 +4102,6 @@ function csvJSON(csv){
 }
 
 
-
->>>>>>> Stashed changes
 var autoComplete;  
 function createApi(){  
   var array_search = new Array();

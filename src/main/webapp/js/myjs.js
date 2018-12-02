@@ -4072,11 +4072,9 @@ function removeLayer(){
     });
 }
 
-<<<<<<< Updated upstream
 
 //autofill part.
 //TODO in the future
-=======
 // csv to json
 function csvJSON(csv){
     csv = csv + '';
@@ -4104,8 +4102,6 @@ function csvJSON(csv){
 }
 
 
-
->>>>>>> Stashed changes
 var autoComplete;  
 function createApi(){  
   var array_search = new Array();

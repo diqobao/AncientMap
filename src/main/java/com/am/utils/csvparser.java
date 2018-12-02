@@ -34,7 +34,6 @@ public class csvparser {
         System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(readAll));
         String s = "";
         s += mapper.writerWithDefaultPrettyPrinter().writeValueAsString(readAll);
-        System.out.println(s);
         return s;
     }
 }
