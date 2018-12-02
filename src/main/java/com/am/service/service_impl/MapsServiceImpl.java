@@ -2,12 +2,21 @@ package com.am.service.service_impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.am.dao.MapsMapper;
 import com.am.pojo.Maps;
 import com.am.service.MapsService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import com.am.utils.csvparser;
 
 @Component
 public class MapsServiceImpl implements MapsService{
@@ -25,8 +34,7 @@ public class MapsServiceImpl implements MapsService{
 		result = mapsMapper.findMapsByUserid(userid);
 		return result;
 	}
-	public String findLayerTreeByMap(Maps map) throws Exception
-	{
+	public String findLayerTreeByMap(Maps map) throws Exception {
 		String result = mapsMapper.findLayerTreeByMaps(map);
 		return result;
 	}
@@ -41,4 +49,11 @@ public class MapsServiceImpl implements MapsService{
 		return result;
 	}
 
+	public String upLoadMap(MultipartFile file0) throws Exception {
+		File file = new File(file0.getOriginalFilename());
+		file0.transferTo(file);
+		csvparser parser = new csvparser(file);
+		String output = parser.csv2json();
+		return output;
+	}
 }
