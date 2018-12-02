@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="AncientMap:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="AncientMap.war">
-      <element id="artifact" artifact-name="AncientMap:war exploded" />
-    </root>
-  </artifact>
-</component>

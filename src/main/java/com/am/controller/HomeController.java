@@ -14,9 +14,4 @@ public class HomeController {
         modelAndView.setViewName("homepage");
         return modelAndView;
     }
-    @RequestMapping("/hello")
-    public String test() throws Exception {
-        String message = "Welcome to Spring 4.0 !";
-        return message;
-    }
 }

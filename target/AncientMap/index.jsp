@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/spectrum.css">
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
-    <script typ e="text/javascript" src="./jquery-easyui-1.5.2/locale/easyui-lang-en.js"></script>
+    <script type="text/javascript" src="./jquery-easyui-1.5.2/locale/easyui-lang-en.js"></script>
     <script type="text/javascript" src="./js/echarts.js"></script>
     <script type="text/javascript" src="./js/bmap.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QI35PbXyYw28IT7FhGbtHIvE4GLfwDb2"></script>
@@ -136,6 +136,8 @@
                 <br/>
                 <select class="easyui-combobox" id="mapSelect" label="Maps:" labelPosition="top" style="width:100%;">
                 </select>
+                <p>Upload New Map</p>
+                <a id="upload" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:90px">Upload</a>
             </div>
         </div>
     </div>
@@ -185,7 +187,7 @@
 </div>
 <!-- Create window from markup. -->
 <div id="loginWindow" class="easyui-window" title="User Login" style="width:400px;height:190px;padding:5px"
-     data-options="closed:false, headerCls:'wintitle',resizable:false,maximizable:false,iconCls:'icon-zju',cls:'c6'">
+     data-options="closed:false, headerCls:'wintitle',resizable:false,maximizable:false">
     <div class="easyui-layout" data-options = "fit:true">
         <div data-options="region:'center',border:false" style="padding:5px;background:#fff;border:1px solid #ccc;">
             <form id="loginForm" method="post" style="text-align:center">
@@ -210,6 +212,22 @@
                 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#loginWindow') .window('close')" style="width:60px">Cancel</a>
             </div>
         </div>
+    </div>
+</div>
+<%--Upload window--%>
+<div id="uploadWindow" class="easyui-window" title="Upload New File" style="width:400px;height:190px;padding:5px"
+     data-options="closed:true, headerCls:'wintitle',resizable:false,maximizable:false">
+    <div class="easyui-layout" data-options = "fit:true">
+        <form id="uploadForm" method="post" style="text-align:center" enctype="multipart/form-data">
+            <%--<label>file name：</label>--%>
+            <%--<input type="text" class="easyui-textbox" name="filename" id="filename" style="width:260px;"data-options="prompt:'Filename'">--%>
+            <label>csv File：</label>
+            <input name="file" class="easyui-filebox" id="file" style="width:260px" data-options="accept:'text/csv'">
+        <div style="text-align:center;padding:5px;position:absolute;top:100px;left:35%;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" id="upload_map" style="width:60px">Upload</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#uploadWindow') .window('close')" style="width:60px">Cancel</a>
+        </div>
+        </form>
     </div>
 </div>
 

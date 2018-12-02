@@ -1,5 +1,6 @@
 package com.am.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.am.pojo.Maps;
 import com.am.service.MapsService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Controller
 public class MapsController {
@@ -54,12 +63,28 @@ public class MapsController {
 		result = mapsService.findMapByUserid(userid);
 		return result;
 	}
-	@RequestMapping("/layerTreeRefresh.action")
+	@RequestMapping("/x.action")
 	@ResponseBody
-	public String layerTreeRefresh(Maps map,HttpSession session) throws Exception {
+	public String layerTreeRefresh(Maps map, HttpSession session) throws Exception {
 		map.setUserid((int)session.getAttribute("id"));
 		String result = mapsService.findLayerTreeByMap(map);
 		return result;
 	}
 
+	@RequestMapping("/upload.action")
+	@ResponseBody
+	public String mapUpload(@RequestParam("file") MultipartFile file) throws Exception {
+		if(file == null) return "failed";
+		if (!file.isEmpty()) {
+			try {
+				String output = mapsService.upLoadMap(file);
+				System.out.println(output);
+				return output;
+			} catch (Exception e) {
+				return "failed";
+			}
+		}
+		return "failed";
+
+	}
 }
