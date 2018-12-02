@@ -7,14 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b520941a-83a6-48ed-8178-0917cbe86cac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6651ea68-5b7a-4382-8a15-2ff9558f4076.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/am/controller/MapsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/am/controller/MapsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MapsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MapsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/myjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/myjs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/AncientMap.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/AncientMap.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/AncientMap/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/AncientMap/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/AncientMap/WEB-INF/classes/com/am/controller/MapsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/AncientMap/WEB-INF/classes/com/am/controller/MapsController.class" afterDir="false" />
@@ -61,6 +54,7 @@
         <counts>
           <entry key="java" value="132" />
           <entry key="js" value="395" />
+          <entry key="txt" value="30" />
           <entry key="xml" value="62" />
         </counts>
       </usages-collector>
@@ -68,6 +62,7 @@
         <counts>
           <entry key="JAVA" value="132" />
           <entry key="JavaScript" value="395" />
+          <entry key="PLAIN_TEXT" value="30" />
           <entry key="SQL" value="1" />
           <entry key="XML" value="61" />
         </counts>
@@ -88,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/js/myjs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="3423" column="48" lean-forward="true" selection-start-line="3423" selection-start-column="48" selection-end-line="3423" selection-end-column="48" />
+            <state relative-caret-position="345">
+              <caret line="3449" column="39" selection-start-line="3449" selection-start-column="39" selection-end-line="3449" selection-end-column="39" />
               <folding>
                 <element signature="e#148#5128#0" />
                 <element signature="e#5298#7600#0" />
@@ -160,7 +155,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
+            <state relative-caret-position="-1078">
               <caret line="136" column="34" selection-start-line="136" selection-start-column="34" selection-end-line="136" selection-end-column="34" />
             </state>
           </provider>
@@ -454,12 +449,20 @@
       <workItem from="1543687267381" duration="32756000" />
       <workItem from="1543778469301" duration="5270000" />
       <workItem from="1543785065247" duration="195000" />
-      <workItem from="1543785452613" duration="2811000" />
+      <workItem from="1543785452613" duration="3055000" />
     </task>
+    <task id="LOCAL-00001" summary="Map Refresh">
+      <created>1543788882125</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1543788882125</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16421000" />
+    <option name="totallyTimeSpent" value="16665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -546,6 +549,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Map Refresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map Refresh" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AncientMap.iml">
@@ -703,15 +710,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
+        <state relative-caret-position="-1078">
           <caret line="136" column="34" selection-start-line="136" selection-start-column="34" selection-end-line="136" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/myjs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="3423" column="48" lean-forward="true" selection-start-line="3423" selection-start-column="48" selection-end-line="3423" selection-end-column="48" />
+        <state relative-caret-position="345">
+          <caret line="3449" column="39" selection-start-line="3449" selection-start-column="39" selection-end-line="3449" selection-end-column="39" />
           <folding>
             <element signature="e#148#5128#0" />
             <element signature="e#5298#7600#0" />
