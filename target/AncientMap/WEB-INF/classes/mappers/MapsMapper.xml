@@ -8,6 +8,7 @@
 			<if test="centery != null">CENTERY=#{centery},</if>
 			<if test="zoomlevel != null">ZOOMLEVEL=#{zoomlevel},</if>
 			<if test="layertreejson != null">LAYERTREEJSON=#{layertreejson},</if>
+			<if test="jsonmap != null">JSONMAP=#{jsonmap}</if>
 		</set>
 		<where>
 			USERID =#{userid} AND MAPNAME =#{mapname}

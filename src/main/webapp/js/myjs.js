@@ -2719,7 +2719,6 @@ var people_level_c = people_level.map(function(item) {
         ]
     };
 });
-//所有要绘制的数据系列
 var allSeries = [{
     name: 'employ',
     type: 'scatter',
@@ -2734,202 +2733,229 @@ var allSeries = [{
             ]
         };
     }),
+    tooltip: { //应用提示框组件
+        trigger: 'item',
+        show: true,
+        formatter: function(params) {
+            $('#p_data').window('open');
+            $('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
+            //return params.name + ' : ' + params.value[2] + "人";
+        }
+    },
     zlevel:1
-}, {
-    name: 'top5',
-    type: 'effectScatter',
-    coordinateSystem: 'bmap',
-    data: data.map(function(item) {
-        return {
-            name: item[0],
-            value: [
-                item[3], //第一个值为经度
-                item[2], //纬度
-                item[1] //该点数值
-            ]
-        };
-    }).sort(function(a, b) {
-        return b.value[2] - a.value[2];
-    }).slice(0, 5),
-    symbolSize: function(val) {
-        return val[2] / 12;
-    },
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(params) {
-			$('#p_data').window('open');
-        	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
-            //return params.name + ' : ' + params.value[2] + "人";
-        }
-    },
-    showEffectOn: 'render',
-    rippleEffect: {
-        brushType: 'stroke'
-    },
-    hoverAnimation: true,
-    zlevel:2
-},{ //绘制散点图 省
-    name: 'province_qyw',
-    type: 'scatter',
-    coordinateSystem: 'bmap',
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(params) {
-            $('#p_data').window('open');
-        	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
-        }
-    },
-    data: province_level_c,//原来的省级画法
-}, {//省 top5 绘制涟漪散点图
-    name: 'province_qyw_top5',
-    type: 'effectScatter',
-    coordinateSystem: 'bmap',
-    data: province_level_c.sort(function(a, b) {
-        return b.value[2] - a.value[2];
-    }).slice(0, 5),
-    symbolSize: function(val) {
-        return val[2] / 10;
-    },
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(params) {
-            //return params.name + ' : ' + params.value[2] + "人";
-			 //return params.name + ' : ' + params.value[2] + "人";
-            $('#p_data').window('open');
-        	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
-        	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
-        }
-    },
-    showEffectOn: 'render',
-    rippleEffect: {
-        brushType: 'stroke'
-    },
-    hoverAnimation: true,
-    label: {
-        normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: false
-        }
-    },
-    itemStyle: {
-        normal: {
-            //color: 'purple',
-            shadowBlur: 10,
-            shadowColor: '#333'
-        }
-    },
-    zlevel: 1 //设置绘制的元素在第1层的canvas中  元素data-zr-dom-id的属性为zr_1
-}, { //绘制散点图 县
-    name: 'city_qyw',
-    type: 'scatter',
-    coordinateSystem: 'bmap',
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(params) {
-            var people;
-            for (var i = 0; i < city_level_c.length; i++) {
-                if (city_level_c[i]["name"] == params.name) {
-                    var peopleArr = city_level_c[i]["people"];
-                    if (peopleArr.length > 3) {
-                        peopleArr = peopleArr.slice(0, 3);
-                    }
-                    people = peopleArr.join("，");
-                    break;
-                }
-            };
-            //return params.name + ' : ' + params.value[2] + "人" + "<br/>包括：" + people + "等人"
-            $('#p_data').window('open');
-        	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
-        	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]+"包括"+people+"等人");
-        }
-    },
-    data: city_level_c,
-    itemStyle: {
-        normal: {
-            color: 'purple'
-        }
-    }
-}, {//县top5 数据绘制涟漪点图
-    name: 'city_qyw_top5',
-    type: 'effectScatter',
-    coordinateSystem: 'bmap',
-    data: city_level_c.sort(function(a, b) {
-        return b.value[2] - a.value[2];
-    }).slice(0, 5),
-    symbolSize: function(val) {
-        if (val[2] < 5) {
-            return val[2];
-        } else {
-            return val[2] / 2;
-        }
-    },
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(params) {
-            var people;
-            for (var i = 0; i < city_level_c.length; i++) {
-                if (city_level_c[i]["name"] == params.name) {
-                    var peopleArr = city_level_c[i]["people"];
-                    if (peopleArr.length > 3) {
-                        peopleArr = peopleArr.slice(0, 3);
-                    }
-                    people = peopleArr.join("，");
-                    break;
-                }
-            };
-            return params.name + ' : ' + params.value[2] + "人" + "<br/>包括：" + people + "等人";
-            $('#p_data').window('open');
-        	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
-            $('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]+"包括"+people+"等人");
-        }
-    },
-    showEffectOn: 'render',
-    rippleEffect: {
-        brushType: 'stroke'
-    },
-    hoverAnimation: true,
-    label: {
-        normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: false
-        }
-    },
-    itemStyle: {
-        normal: {
-            color: 'purple',
-            shadowBlur: 10,
-            shadowColor: '#333'
-        }
-    },
-    zlevel: 2 //设置绘制的元素在第2层的canvas中  元素data-zr-dom-id的属性为zr_2
-}, { //绘制散点图  个人
-    name: 'people_qyw',
-    type: 'scatter',
-    tooltip: { //应用提示框组件
-        trigger: 'item',
-        show: true,
-        formatter: function(param) {
-            $('#p_data').window('open');
-        	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
-        	$('#data_show').text('查询到的信息:'+params.name);
-        }
-    },
-    coordinateSystem: 'bmap',
-    symbolSize: 8,
-    data: people_level_c,
-    itemStyle: {
-        normal: {
-            color: 'purple'
-        }
-    }
 }];
+//所有要绘制的数据系列
+// var allSeries = [{
+//     name: 'employ',
+//     type: 'scatter',
+//     coordinateSystem: 'bmap',
+//     data: data.map(function(item) {
+//         return {
+//             name: item[0],
+//             value: [
+//                 item[3],
+//                 item[2],
+//                 item[1]
+//             ]
+//         };
+//     }),
+//
+//     zlevel:1
+// }, {
+//     name: 'top5',
+//     type: 'effectScatter',
+//     coordinateSystem: 'bmap',
+//     data: data.map(function(item) {
+//         return {
+//             name: item[0],
+//             value: [
+//                 item[3], //第一个值为经度
+//                 item[2], //纬度
+//                 item[1] //该点数值
+//             ]
+//         };
+//     }).sort(function(a, b) {
+//         return b.value[2] - a.value[2];
+//     }).slice(0, 5),
+//     symbolSize: function(val) {
+//         return val[2] / 12;
+//     },
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(params) {
+// 			$('#p_data').window('open');
+//         	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
+//             //return params.name + ' : ' + params.value[2] + "人";
+//         }
+//     },
+//     showEffectOn: 'render',
+//     rippleEffect: {
+//         brushType: 'stroke'
+//     },
+//     hoverAnimation: true,
+//     zlevel:2
+// },{ //绘制散点图 省
+//     name: 'province_qyw',
+//     type: 'scatter',
+//     coordinateSystem: 'bmap',
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(params) {
+//             $('#p_data').window('open');
+//         	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
+//         }
+//     },
+//     data: province_level_c,//原来的省级画法
+// }, {//省 top5 绘制涟漪散点图
+//     name: 'province_qyw_top5',
+//     type: 'effectScatter',
+//     coordinateSystem: 'bmap',
+//     data: province_level_c.sort(function(a, b) {
+//         return b.value[2] - a.value[2];
+//     }).slice(0, 5),
+//     symbolSize: function(val) {
+//         return val[2] / 10;
+//     },
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(params) {
+//             //return params.name + ' : ' + params.value[2] + "人";
+// 			 //return params.name + ' : ' + params.value[2] + "人";
+//             $('#p_data').window('open');
+//         	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
+//         	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]);
+//         }
+//     },
+//     showEffectOn: 'render',
+//     rippleEffect: {
+//         brushType: 'stroke'
+//     },
+//     hoverAnimation: true,
+//     label: {
+//         normal: {
+//             formatter: '{b}',
+//             position: 'right',
+//             show: false
+//         }
+//     },
+//     itemStyle: {
+//         normal: {
+//             //color: 'purple',
+//             shadowBlur: 10,
+//             shadowColor: '#333'
+//         }
+//     },
+//     zlevel: 1 //设置绘制的元素在第1层的canvas中  元素data-zr-dom-id的属性为zr_1
+// }, { //绘制散点图 县
+//     name: 'city_qyw',
+//     type: 'scatter',
+//     coordinateSystem: 'bmap',
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(params) {
+//             var people;
+//             for (var i = 0; i < city_level_c.length; i++) {
+//                 if (city_level_c[i]["name"] == params.name) {
+//                     var peopleArr = city_level_c[i]["people"];
+//                     if (peopleArr.length > 3) {
+//                         peopleArr = peopleArr.slice(0, 3);
+//                     }
+//                     people = peopleArr.join("，");
+//                     break;
+//                 }
+//             };
+//             //return params.name + ' : ' + params.value[2] + "人" + "<br/>包括：" + people + "等人"
+//             $('#p_data').window('open');
+//         	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
+//         	$('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]+"包括"+people+"等人");
+//         }
+//     },
+//     data: city_level_c,
+//     itemStyle: {
+//         normal: {
+//             color: 'purple'
+//         }
+//     }
+// }, {//县top5 数据绘制涟漪点图
+//     name: 'city_qyw_top5',
+//     type: 'effectScatter',
+//     coordinateSystem: 'bmap',
+//     data: city_level_c.sort(function(a, b) {
+//         return b.value[2] - a.value[2];
+//     }).slice(0, 5),
+//     symbolSize: function(val) {
+//         if (val[2] < 5) {
+//             return val[2];
+//         } else {
+//             return val[2] / 2;
+//         }
+//     },
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(params) {
+//             var people;
+//             for (var i = 0; i < city_level_c.length; i++) {
+//                 if (city_level_c[i]["name"] == params.name) {
+//                     var peopleArr = city_level_c[i]["people"];
+//                     if (peopleArr.length > 3) {
+//                         peopleArr = peopleArr.slice(0, 3);
+//                     }
+//                     people = peopleArr.join("，");
+//                     break;
+//                 }
+//             };
+//             return params.name + ' : ' + params.value[2] + "人" + "<br/>包括：" + people + "等人";
+//             $('#p_data').window('open');
+//         	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
+//             $('#data_show').text('查询到的信息:'+params.name+':'+params.value[2]+"包括"+people+"等人");
+//         }
+//     },
+//     showEffectOn: 'render',
+//     rippleEffect: {
+//         brushType: 'stroke'
+//     },
+//     hoverAnimation: true,
+//     label: {
+//         normal: {
+//             formatter: '{b}',
+//             position: 'right',
+//             show: false
+//         }
+//     },
+//     itemStyle: {
+//         normal: {
+//             color: 'purple',
+//             shadowBlur: 10,
+//             shadowColor: '#333'
+//         }
+//     },
+//     zlevel: 2 //设置绘制的元素在第2层的canvas中  元素data-zr-dom-id的属性为zr_2
+// }, { //绘制散点图  个人
+//     name: 'people_qyw',
+//     type: 'scatter',
+//     tooltip: { //应用提示框组件
+//         trigger: 'item',
+//         show: true,
+//         formatter: function(param) {
+//             $('#p_data').window('open');
+//         	//$("data_show").append("<b>"+ params.name + ':' + params.value[2] +"</b>");
+//         	$('#data_show').text('查询到的信息:'+params.name);
+//         }
+//     },
+//     coordinateSystem: 'bmap',
+//     symbolSize: 8,
+//     data: people_level_c,
+//     itemStyle: {
+//         normal: {
+//             color: 'purple'
+//         }
+//     }
+// }];
 
 
 //What we plan to do is to store currentSeries in
@@ -3342,6 +3368,7 @@ $(document).ready(function() {
     });
     //实现保存地图参数的功能，包括中心点(x/y),zoomlevel,basemap,layertreejson
     $('#save_map').bind('click',function(){
+        allSeries
         $.ajax({
         	url:"./mapSave.action",
         	async:true,
@@ -3356,7 +3383,7 @@ $(document).ready(function() {
                 zoomlevel: bmap.getZoom(),
                 layertreejson: JSON.stringify(layerTreeJson),
                 jsonmap: JSON.stringify(allSeries[0].data)
-                // jsonmap: uploadResult
+                //jsonmap: uploadResult
             },
             success: function(result){
                 if(result == "success"){
@@ -3420,9 +3447,17 @@ $(document).ready(function() {
                 if (result != "failed") {
                     var jsonfile = JSON.parse(result);
                     var output = convertData(jsonfile);
-                    uploadResult = JSON.stringify(output);
+                    uploadResult = JSON.parse(output);
+                    //After upload, refresh
+                    allSeries[0].data = uploadResult;
+                    currentSeries.push(allSeries[0]);
+                    option.series = currentSeries;
+                    myChart.setOption(option,true);
+                    resetBmap();
+
                     $.messager.alert("Message", uploadResult);
                     $.messager.alert("Message", "Upload Success");
+                    //window.location.reload();
                 } else {
                     $.messager.alert("Message", "Upload Failed");
                 }
@@ -3431,12 +3466,12 @@ $(document).ready(function() {
 
     });
 
-    //更新选定地图的图层树
-     $('#mapSelect').combobox({
+    //更新选定地图
+    $('#mapSelect').combobox({
         onSelect: function(rec) {
-        	$.ajax({
-            	url:"./layerTreeRefresh.action",
-            	async:true,
+            $.ajax({
+                url:"./selectMap.action",
+                async:true,
                 type:"post",
                 dataType:"json",
                 //contentType:"application/json;charset=utf-8",
@@ -3444,46 +3479,72 @@ $(document).ready(function() {
                     mapname: rec.text,
                 },
                 success: function(result){
-            		$("#layerTree").tree({
-                	dataType:"json",
-                    data:result});
-            		layerTreeJson = result;
-            		var tmpSeries = new Array();
-            		if(result[0].children){
-            			for(var j = 0;j<result[0].children.length; j++){
-                			if(result[0].children[j].checked == true){
-                				for(var i = 0; i< allSeries.length; i++){
-                					if(result[0].children[j].id == allSeries[i].name)
-                						tmpSeries.push(allSeries[i]);
-                				}
-                			}
-                			
-                		}
-            			$.messager.alert("Message","Layertree Update Success");
-            		}
-            		else {
-            			$.messager.alert("Message","No LayerTree under the Map");
-					}
-            		currentSeries = tmpSeries.slice(0);
-                	option.series = currentSeries;
-                	myChart.setOption(option,true);
-                	resetBmap();
-                },
-                error: function(e) { 
-                	$("#layerTree").tree({
-                    	dataType:"json",
-                        data:[{"id":"layerFather","text":"Layers"}]});
-                	layerTreeJson = [{"id":"layerFather","text":"Layers"}];
-                	var tmpSeries = new Array();
-                	currentSeries = tmpSeries.slice(0);
-                	option.series = currentSeries;
-                	myChart.setOption(option,true);
-                	resetBmap();
-                	$.messager.alert("Message","No value in layer Tree");
-				} 
+                    var tmpSeries = result;
+                    for(var i = 0;i<result.length; i++){
+                        var tmpJson = JSON.parse(result[i]);
+                        allSeries[0].data = tmpJson;
+                        currentSeries.push(allSeries[0]);
+                    }
+                    $.messager.alert("Message","Load old map Success");
+                    option.series = currentSeries;
+                    myChart.setOption(option,true);
+                    resetBmap();
+                }
             })
         }
     });
+    //  $('#mapSelect').combobox({
+    //     onSelect: function(rec) {
+    //     	$.ajax({
+    //         	url:"./selectMap.action",
+    //         	async:true,
+    //             type:"post",
+    //             dataType:"json",
+    //             //contentType:"application/json;charset=utf-8",
+    //             data:{
+    //                 mapname: rec.text,
+    //             },
+    //             success: function(result){
+    //         		$("#layerTree").tree({
+    //             	dataType:"json",
+    //                 data:result});
+    //         		layerTreeJson = result;
+    //         		var tmpSeries = new Array();
+    //         		if(result[0].children){
+    //         			for(var j = 0;j<result[0].children.length; j++){
+    //             			if(result[0].children[j].checked == true){
+    //             				for(var i = 0; i< allSeries.length; i++){
+    //             					if(result[0].children[j].id == allSeries[i].name)
+    //             						tmpSeries.push(allSeries[i]);
+    //             				}
+    //             			}
+    //
+    //             		}
+    //         			$.messager.alert("Message","Layertree Update Success");
+    //         		}
+    //         		else {
+    //         			$.messager.alert("Message","No LayerTree under the Map");
+	// 				}
+    //         		currentSeries = tmpSeries.slice(0);
+    //             	option.series = currentSeries;
+    //             	myChart.setOption(option,true);
+    //             	resetBmap();
+    //             },
+    //             error: function(e) {
+    //             	$("#layerTree").tree({
+    //                 	dataType:"json",
+    //                     data:[{"id":"layerFather","text":"Layers"}]});
+    //             	layerTreeJson = [{"id":"layerFather","text":"Layers"}];
+    //             	var tmpSeries = new Array();
+    //             	currentSeries = tmpSeries.slice(0);
+    //             	option.series = currentSeries;
+    //             	myChart.setOption(option,true);
+    //             	resetBmap();
+    //             	$.messager.alert("Message","No value in layer Tree");
+	// 			}
+    //         })
+    //     }
+    // });
     $('#themeSelect').combobox({//为顶部主题选择创建选择文件
         onSelect: function(rec) {
             if (rec.text == "gray")
@@ -3516,173 +3577,106 @@ $(document).ready(function() {
     //添加移动监听
     bmap.addEventListener("moveend",mapMoveEnd);
     
-    //图层树的显隐box显示与显隐事件绑定
-    $("#layerTree").tree({
-		checkbox:function(node){
-			if(node.id=="layerFather"){
-				return false;
-			}else{
-				return true;
-			}
-		},
-        onCheck:onLayerCheck
-     });
-    
-    //初始的图层树组织
-    $("#layerTree").tree({
-    	dataType:"json",
-        data:layerTreeJson
-    });
-    $("#addEmploy").bind("click",function(){
-    	//添加图层后，首先绘制，将这个图层的数据加入到currentSeries中，然后setOption
-    	currentSeries.push(allSeries[0]);
-    	option.series = currentSeries;
-    	myChart.setOption(option,true);
-    	resetBmap();
-    	
-    	//然后更新图层树,在父级下增加child
-    	var newLayer = {"id":allSeries[0].name,"text":allSeries[0].name,"checked":true}
-    	if(layerTreeJson[0]["children"] == null){
-    		layerTreeJson[0]["children"] = new Array();
-    	}
-    	layerTreeJson[0]["children"].push(newLayer);
-    	$("#layerTree").tree({
-        	dataType:"json",
-            data:layerTreeJson
-        });
-    })
-    
-    $("#addTop5").bind("click",function(){
-    	//添加图层后，首先绘制，将这个图层的数据加入到currentSeries中，然后setOption
-    	currentSeries.push(allSeries[1]);
-    	option.series = currentSeries;
-    	myChart.setOption(option,true);
-    	resetBmap();
-    	
-    	//然后更新图层树,在父级下增加child
-    	var newLayer = {"id":allSeries[1].name,"text":allSeries[1].name,"checked":true}
-    	if(layerTreeJson[0]["children"] == null){
-    		layerTreeJson[0]["children"] = new Array();
-    	}
-    	layerTreeJson[0]["children"].push(newLayer);
-    	$("#layerTree").tree({
-        	dataType:"json",
-            data:layerTreeJson
-        });
-    })
-    
-    $("#addCity").bind("click",function(){
-    	addLayer("清代作者分布",[
-    	    ["钱塘", 29, 120.19, 30.26],
-    	    ["婺源", 25, 117.84459, 29.24473],
-    	    ["庐陵", 24, 114.97128, 27.10324],
-    	    ["鄱阳", 21, 116.66383, 28.99417],
-    	    ["浦江", 17, 119.88368, 29.45871],
-    	    ["休宁", 17, 118.17577, 29.78119],
-    	    ["东平", 14, 116.480642, 35.941821],
-    	    ["临川", 14, 116.35134, 27.98478],
-    	    ["平阳", 14, 120.55644, 27.67572],
-    	    ["歙县", 14, 118.43394, 29.86577],
-    	    ["河内", 13, 112.92, 35.08],
-    	    ["天台", 13, 121.02656, 29.13826],
-    	    ["鄞县", 13, 121.54266, 29.86632],
-    	    ["永嘉", 13, 120.65322, 28.01829],
-    	    ["真定", 13, 114.56364, 38.14011],
-    	    ["吴县", 13, 120.61862, 31.31271],
-    	    ["奉化", 12, 121.40691, 29.65166],
-    	    ["济南", 12, 117, 36.65],
-    	    ["豫章", 12, 115.89772, 28.6749],
-    	    ["黄岩", 11, 121.27, 28.64],
-    	    ["嘉兴", 11, 120.7532, 30.76747],
-    	    ["吴兴", 11, 120.1, 30.86],
-    	    ["诸暨", 11, 120.22766, 29.71314]]);
-    });
-//    $("#drawTimeSeries").bind("click",function(){
-//    	var names = new Array();
-//    	for(var i = 0; i < currentSeries.length; i++){
-//    		names.push(currentSeries[i]["name"]);
-//    	}
-//    	option.series = null;
-//    	option = {
-//    			baseOption: option,
-//    			options:[]
-//    	};
-//    	option.baseOption.timeline ={//时序图时间轴绘制控制
-//                axisType: 'category',
-//                orient: 'vertical',
-//                autoPlay: true,
-//                inverse: true,
-//                playInterval: 1000,
-//                left: null,
-//                right: 30,
-//                top: 40,
-//                bottom: 40,
-//                width: 55,
-//                height: null,
-//                label: {
-//                    normal: {
-//                        textStyle: {
-//                            color: '#ddd'
-//                        }
-//                    },
-//                    emphasis: {
-//                        textStyle: {
-//                            color: '#fff'
-//                        }
-//                    }
-//                },
-//                symbol: 'none',
-//                lineStyle: {
-//                    color: '#555'
-//                },
-//                checkpointStyle: {
-//                    color: '#bbb',
-//                    borderColor: '#777',
-//                    borderWidth: 2
-//                },
-//                controlStyle: {
-//                    showNextBtn: false,
-//                    showPrevBtn: false,
-//                    normal: {
-//                        color: '#666',
-//                        borderColor: '#666'
-//                    },
-//                    emphasis: {
-//                        color: '#aaa',
-//                        borderColor: '#aaa'
-//                    }
-//                },
-//                data: names
-//            };
-//        //animationDurationUpdate: 100,
-//        //animationEasingUpdate: 'quinticInOut'
-//        for (var n = 0; n < currentSeries.length; n++) {//设置时间变换后的option内容
-//        	option.options.push({
-//        		series:currentSeries[n]
-//        	});
-//        }
-//    	myChart.setOption(option);
-//    	resetBmap();
-//    })
-
-    //图层树的右键菜单
-    $("#layerTree").tree({
-    	onContextMenu:function(e,node){
-    		//阻止浏览器的右键菜单
-    		e.preventDefault();
-    		//选中右键点击的图层
-    		$('#layerTree').tree('select', node.target);
-    		//展示菜单
-    		$('#layerMenu').menu('show', {
-    			left: e.pageX,
-    			top: e.pageY
-    		});
-    	}
-    });
-    
-    //右键菜单中移除按钮的点击事件绑定
-    $("#removeLayer").bind("click",removeLayer);
-    
+    // //图层树的显隐box显示与显隐事件绑定
+    // $("#layerTree").tree({
+	// 	checkbox:function(node){
+	// 		if(node.id=="layerFather"){
+	// 			return false;
+	// 		}else{
+	// 			return true;
+	// 		}
+	// 	},
+    //     onCheck:onLayerCheck
+    //  });
+    //
+    // //初始的图层树组织
+    // $("#layerTree").tree({
+    // 	dataType:"json",
+    //     data:layerTreeJson
+    // });
+    // $("#addEmploy").bind("click",function(){
+    // 	//添加图层后，首先绘制，将这个图层的数据加入到currentSeries中，然后setOption
+    // 	currentSeries.push(allSeries[0]);
+    // 	option.series = currentSeries;
+    // 	myChart.setOption(option,true);
+    // 	resetBmap();
+    //
+    // 	// //然后更新图层树,在父级下增加child
+    // 	// var newLayer = {"id":allSeries[0].name,"text":allSeries[0].name,"checked":true}
+    // 	// if(layerTreeJson[0]["children"] == null){
+    // 	// 	layerTreeJson[0]["children"] = new Array();
+    // 	// }
+    // 	// layerTreeJson[0]["children"].push(newLayer);
+    // 	// $("#layerTree").tree({
+    //     // 	dataType:"json",
+    //     //     data:layerTreeJson
+    //     // });
+    // })
+    //
+    // $("#addTop5").bind("click",function(){
+    // 	//添加图层后，首先绘制，将这个图层的数据加入到currentSeries中，然后setOption
+    // 	currentSeries.push(allSeries[1]);
+    // 	option.series = currentSeries;
+    // 	myChart.setOption(option,true);
+    // 	resetBmap();
+    //
+    // 	// //然后更新图层树,在父级下增加child
+    // 	// var newLayer = {"id":allSeries[1].name,"text":allSeries[1].name,"checked":true}
+    // 	// if(layerTreeJson[0]["children"] == null){
+    // 	// 	layerTreeJson[0]["children"] = new Array();
+    // 	// }
+    // 	// layerTreeJson[0]["children"].push(newLayer);
+    // 	// $("#layerTree").tree({
+    //     // 	dataType:"json",
+    //     //     data:layerTreeJson
+    //     // });
+    // })
+    //
+    // $("#addCity").bind("click",function(){
+    // 	addLayer("清代作者分布",[
+    // 	    ["钱塘", 29, 120.19, 30.26],
+    // 	    ["婺源", 25, 117.84459, 29.24473],
+    // 	    ["庐陵", 24, 114.97128, 27.10324],
+    // 	    ["鄱阳", 21, 116.66383, 28.99417],
+    // 	    ["浦江", 17, 119.88368, 29.45871],
+    // 	    ["休宁", 17, 118.17577, 29.78119],
+    // 	    ["东平", 14, 116.480642, 35.941821],
+    // 	    ["临川", 14, 116.35134, 27.98478],
+    // 	    ["平阳", 14, 120.55644, 27.67572],
+    // 	    ["歙县", 14, 118.43394, 29.86577],
+    // 	    ["河内", 13, 112.92, 35.08],
+    // 	    ["天台", 13, 121.02656, 29.13826],
+    // 	    ["鄞县", 13, 121.54266, 29.86632],
+    // 	    ["永嘉", 13, 120.65322, 28.01829],
+    // 	    ["真定", 13, 114.56364, 38.14011],
+    // 	    ["吴县", 13, 120.61862, 31.31271],
+    // 	    ["奉化", 12, 121.40691, 29.65166],
+    // 	    ["济南", 12, 117, 36.65],
+    // 	    ["豫章", 12, 115.89772, 28.6749],
+    // 	    ["黄岩", 11, 121.27, 28.64],
+    // 	    ["嘉兴", 11, 120.7532, 30.76747],
+    // 	    ["吴兴", 11, 120.1, 30.86],
+    // 	    ["诸暨", 11, 120.22766, 29.71314]]);
+    // });
+    //
+    // //图层树的右键菜单
+    // // $("#layerTree").tree({
+    // // 	onContextMenu:function(e,node){
+    // // 		//阻止浏览器的右键菜单
+    // // 		e.preventDefault();
+    // // 		//选中右键点击的图层
+    // // 		$('#layerTree').tree('select', node.target);
+    // // 		//展示菜单
+    // // 		$('#layerMenu').menu('show', {
+    // // 			left: e.pageX,
+    // // 			top: e.pageY
+    // // 		});
+    // // 	}
+    // // });
+    //
+    // //右键菜单中移除按钮的点击事件绑定
+    // $("#removeLayer").bind("click",removeLayer);
+    //
     //右键菜单中自定样式按钮的点击事件绑定(显示自定义样式窗口)
     $("#changeStyle").bind("click",function(){
     	//假如图层隐藏，则提示先打开图层
@@ -3772,39 +3766,39 @@ function geoCoder(value) {
     }, "杭州市");
 }
 
-function onLayerCheck(node, checked) {
-	//打开一个图层时，在当前要绘制系列中加入该图层的系列
-	if (checked == true) {
-		for (var i = 0; i < allSeries.length; i++) {
-			if (allSeries[i].name.indexOf(node.id) != -1) {
-				currentSeries.push(allSeries[i]);
-				break;
-			}
-		}
-		option.series = currentSeries.slice(0);
-		myChart.setOption(option, true);
-		for(var i = 0;i<layerTreeJson[0].children.length;i++){
-			if(layerTreeJson[0].children[i].id == node.id)
-				layerTreeJson[0].children[i].checked = true;
-		}
-	}
-	//关闭一个图层时，在当前要绘制系列中去掉该图层的系列
-	else if (checked == false) {
-		for (var i = 0; i < currentSeries.length; i++) {
-			if (currentSeries[i].name.indexOf(node.id) != -1) {
-				currentSeries.splice(i, 1);
-				break;
-			}
-		}
-		option.series = currentSeries.slice(0);
-		myChart.setOption(option, true);
-		for(var i = 0;i<layerTreeJson[0].children.length;i++){
-			if(layerTreeJson[0].children[i].id == node.id)
-				layerTreeJson[0].children[i].checked = false;
-		}
-	}
-	resetBmap();
-}
+// function onLayerCheck(node, checked) {
+// 	//打开一个图层时，在当前要绘制系列中加入该图层的系列
+// 	if (checked == true) {
+// 		for (var i = 0; i < allSeries.length; i++) {
+// 			if (allSeries[i].name.indexOf(node.id) != -1) {
+// 				currentSeries.push(allSeries[i]);
+// 				break;
+// 			}
+// 		}
+// 		option.series = currentSeries.slice(0);
+// 		myChart.setOption(option, true);
+// 		for(var i = 0;i<layerTreeJson[0].children.length;i++){
+// 			if(layerTreeJson[0].children[i].id == node.id)
+// 				layerTreeJson[0].children[i].checked = true;
+// 		}
+// 	}
+// 	//关闭一个图层时，在当前要绘制系列中去掉该图层的系列
+// 	else if (checked == false) {
+// 		for (var i = 0; i < currentSeries.length; i++) {
+// 			if (currentSeries[i].name.indexOf(node.id) != -1) {
+// 				currentSeries.splice(i, 1);
+// 				break;
+// 			}
+// 		}
+// 		option.series = currentSeries.slice(0);
+// 		myChart.setOption(option, true);
+// 		for(var i = 0;i<layerTreeJson[0].children.length;i++){
+// 			if(layerTreeJson[0].children[i].id == node.id)
+// 				layerTreeJson[0].children[i].checked = false;
+// 		}
+// 	}
+// 	resetBmap();
+// }
 
 function mapZoomEnd(type,target){
 	option.bmap.zoom = bmap.getZoom();

@@ -39,17 +39,17 @@ public class MapsController {
 //	}
 	@RequestMapping(value = "/mapSave.action"/*,consumes = "application/json"*/)
 	@ResponseBody
-	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonmap,HttpSession session) throws Exception {
+	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonmap, @RequestParam("layertreejson") String layertreejson,  HttpSession session) throws Exception {
 		//This line is useless
 		//map.setMapname((String)session.getAttribute("mapname"));
 		map.setUserid((int)session.getAttribute("id"));
-		map.setJsonMap(jsonmap);
+		map.setJsonMap(jsonmap); map.setLayertreejson(layertreejson);
 		String result;
 		if(mapsService.findMapByMapName(map).size()!=0) {
 			result = mapsService.updateMap(map);
 		}
 		else {
-			result = mapsService.createMap(map)+session.getAttribute("jsonmap");
+			result = mapsService.createMap(map);
 		}
 		return result;
 	}
@@ -63,11 +63,12 @@ public class MapsController {
 		result = mapsService.findMapByUserid(userid);
 		return result;
 	}
-	@RequestMapping("/x.action")
+	@RequestMapping("/selectMap.action")
 	@ResponseBody
-	public String layerTreeRefresh(Maps map, HttpSession session) throws Exception {
+	public List<String> layerTreeRefresh(@RequestParam("mapname") String mapname,Maps map, HttpSession session) throws Exception {
 		map.setUserid((int)session.getAttribute("id"));
-		String result = mapsService.findLayerTreeByMap(map);
+		map.setMapname(mapname);
+		List<String> result = mapsService.findMapByMapName(map);
 		return result;
 	}
 
