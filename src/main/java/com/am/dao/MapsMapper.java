@@ -13,5 +13,7 @@ public interface MapsMapper {
 
 	public void updateMaps(Maps map) throws Exception;
 	public List<String> findMapsByUserid(int userid) throws Exception;
+	public List<String> findMapsByMapName(Maps map) throws Exception;
 	public String findLayerTreeByMaps(Maps map) throws Exception;
+	public void createMap(Maps map) throws Exception;
 }

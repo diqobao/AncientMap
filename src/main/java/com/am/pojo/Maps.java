@@ -1,5 +1,7 @@
 package com.am.pojo;
 
+import java.util.List;
+
 public class Maps {
 	private int id; 
 	private String mapname;
@@ -8,13 +10,9 @@ public class Maps {
 	private float centerx;
 	private float centery;
 	private int zoomlevel;
-	public String getLayertreejson() {
-		return layertreejson;
-	}
-	public void setLayertreejson(String layertreejson) {
-		this.layertreejson = layertreejson;
-	}
 	private String layertreejson;
+	private String jsonmap;
+
 	public int getId() {
 		return id;
 	}
@@ -30,9 +28,7 @@ public class Maps {
 	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+	public void setUserid(int userid) { this.userid = userid; }
 	public Boolean getAccessibility() {
 		return accessibility;
 	}
@@ -57,6 +53,14 @@ public class Maps {
 	public void setZoomlevel(int zoomlevel) {
 		this.zoomlevel = zoomlevel;
 	}
+	public String getLayertreejson() {
+		return layertreejson;
+	}
+	public void setLayertreejson(String layertreejson) {
+		this.layertreejson = layertreejson;
+	}
+    public String getJsonMap() { return jsonmap;}
+    public void setJsonMap(String jsonMap) {this.jsonmap = jsonMap;}
 
 
 }

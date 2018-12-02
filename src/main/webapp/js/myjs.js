@@ -1,28 +1,6 @@
 var data = [
-                ["北京市", 80, 39.929986, 116.395645],
-                ["上海市", 100, 31.249162, 121.487899],
-                ["广州市", 15, 23.120049, 113.30765],
-                ["杭州市", 20, 30.259244, 120.219375],
-                ["郑州市", 40, 34.75661, 113.649644],
-                ["武汉市", 10, 30.581084, 114.3162],
-                ["深圳市", 6, 22.546054, 114.025974],
-                ["南京市", 30, 32.057236, 118.778074],
-                ["成都市", 35, 30.679943, 104.067923],
-                ["天津市", 46, 39.14393, 117.210813],
-                ["合肥市", 23, 31.866942, 117.282699],
-                ["厦门市", 13, 24.489231, 118.103886],
-                ["东莞市", 31, 23.043024, 113.763434],
-                ["佛山市", 21, 23.035095, 113.134026],
-                ["珠海市", 11, 22.256915, 113.562447],
-                ["保定市", 31, 38.886565, 115.49481],
-                ["石家庄市", 41, 38.048958, 114.522082],
-                ["长沙市", 21, 28.213478, 112.979353],
-                ["南通市", 41, 32.014665, 120.873801],
-                ["苏州市", 71, 31.317987, 120.619907],
-                ["无锡市", 61, 31.570037, 120.305456],
-                ["扬州市", 51, 32.408505, 119.427778],
-                ["哈密地区", 31, 42.858596, 93.528355],
-                ["昆明市", 12, 25.049153, 102.714601]
+                ["Beijing", 80, 39.929986, 116.395645],
+                ["Shanghai", 100, 31.249162, 121.487899],
 ];
 var myChart;//echart实例
 var bmap;//百度地图实例
@@ -2502,6 +2480,8 @@ var layer_manager = [province_level,city_level,people_level];//终级数组，�
 var layer_zoom_manager = [7,12,12];//终级数组，用来接受后端传输的图层数组数据;
 var layer_type=['地名','地名','人名'];
 var layer_json = new Array();
+
+// TODO in the future about array transfor into Json. Which will be not utilzied in this program
 var province_level_c = province_level.map(function(item) {
     return {
         name: item[0],
@@ -2523,6 +2503,7 @@ var city_level_c = city_level.map(function(item) {
         ]
     };
 });
+
 function getPeopleByCity(city) {
     var people = new Array();
     for (var i = 0; i < people_level.length; i++) {
@@ -2551,9 +2532,9 @@ var allSeries = [{
         return {
             name: item[0],
             value: [
-                item[3], //第一个值为经度
-                item[2], //纬度
-                item[1] //该点数值
+                item[3],
+                item[2],
+                item[1]
             ]
         };
     }),
@@ -2754,7 +2735,10 @@ var allSeries = [{
     }
 }];
 
+
+//What we plan to do is to store currentSeries in
 var currentSeries = new Array();
+//It's for echarts to display our map
 var option = {
 		title: {
             text: '创建地图时取的名字',
@@ -2800,6 +2784,7 @@ var option = {
     };
 
 var map;
+var jsonData = allSeries[0];
 $(document).ready(function() {
     map = new BMap.Map("map");
     var beijing_3D = new BMap.Map("beijing_3D");
@@ -3166,20 +3151,28 @@ $(document).ready(function() {
         	async:true,
             type:"post",
             dataType:"text",
-            //contentType:"application/json;charset=utf-8",
-            data:{
+            //headers:{"Content-Type":"application/json;charset=UTF-8"},
+            //contentType:"application/json; charset=utf-8",
+            data: {
                 mapname: $('#mapSelect').combobox('getText'),
             	centerx: bmap.getBounds().getCenter().lng,
                 centery: bmap.getBounds().getCenter().lat,
                 zoomlevel: bmap.getZoom(),
-                layertreejson: JSON.stringify(layerTreeJson)
+                layertreejson: JSON.stringify(layerTreeJson),
+                //jsonmap: JSON.stringify(allSeries[0].data)
             },
             success: function(result){
                 if(result == "success"){
                 	 $.messager.alert("Message","Save Success");
                 }
-                else{
+                else if(result=="failed"){
                     $.messager.alert("Message","Save Failed");
+                }
+                //It's the code for return back status info for debug purpose
+                else
+                {
+                    $.messager.alert("Message",result);
+                    $.messager.alert("Json",JSON.stringify(allSeries[0]));
                 }
             }
         })
@@ -3562,12 +3555,10 @@ function onLayerCheck(node, checked) {
 function mapZoomEnd(type,target){
 	option.bmap.zoom = bmap.getZoom();
 }
-
 function mapMoveEnd(type,target){
 	var centerPoint = bmap.getCenter();
 	option.bmap.center = [centerPoint.lng,centerPoint.lat];
 }
-
 //每次setOption后都需要重新设置bmap
 function resetBmap(){
 	bmap = myChart.getModel().getComponent('bmap').getBMap();
@@ -3829,6 +3820,10 @@ function removeLayer(){
         data:layerTreeJson
     });
 }
+
+
+//autofill part.
+//TODO in the future
 var autoComplete;  
 function createApi(){  
   var array_search = new Array();

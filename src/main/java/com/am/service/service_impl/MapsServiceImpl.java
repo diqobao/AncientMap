@@ -30,4 +30,15 @@ public class MapsServiceImpl implements MapsService{
 		String result = mapsMapper.findLayerTreeByMaps(map);
 		return result;
 	}
+	public String createMap(Maps map) throws Exception
+	{
+		mapsMapper.createMap(map);
+		return "success";
+	}
+	public List<String> findMapByMapName(Maps map) throws Exception
+	{
+		List<String> result = mapsMapper.findMapsByMapName(map);
+		return result;
+	}
+
 }

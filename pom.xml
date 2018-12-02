@@ -104,12 +104,27 @@
     </dependency>
 
     <!--json 序列化和反序列化-->
+    <!--<dependency>-->
+      <!--<groupId>org.codehaus.jackson</groupId>-->
+      <!--<artifactId>jackson-mapper-asl</artifactId>-->
+      <!--<version>1.9.12</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+      <!--<artifactId>jackson-databind</artifactId>-->
+      <!--<version>2.9.7</version>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
-      <version>1.9.12</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.5.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.2</version>
+    </dependency>
     <!--数据库连接池-->
     <dependency>
       <groupId>commons-dbcp</groupId>

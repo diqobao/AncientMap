@@ -13,6 +13,11 @@
 			USERID =#{userid} AND MAPNAME =#{mapname}
 		</where>
 	</update>
+	<insert id="createMap" parameterType="com.am.pojo.Maps">
+		INSERT INTO MAPS(MapName,userId,accessibility,centerx,centery,zoomLevel,LayerTreejson,JsonMap)
+		VALUES (#{mapname},#{userid},#{accessibility},#{centerx},#{centery},#{zoomlevel},#{layertreejson},#{jsonmap})
+	</insert>
+
 	<select id="findMapsByUserid" parameterType="int" resultType="String">
 		SELECT MAPNAME FROM MAPS 
 		<where>
@@ -23,6 +28,12 @@
 		SELECT LAYERTREEJSON FROM MAPS 
 		<where>
 		 	USERID =#{userid} AND MAPNAME =#{mapname}
+		</where>
+	</select>
+	<select id="findMapsByMapName" parameterType="com.am.pojo.Maps" resultType="String">
+		SELECT JSONMAP FROM MAPS
+		<where>
+			USERID =#{userid} AND MAPNAME =#{mapname}
 		</where>
 	</select>
 </mapper>
