@@ -3354,7 +3354,7 @@ $(document).ready(function() {
                 centery: bmap.getBounds().getCenter().lat,
                 zoomlevel: bmap.getZoom(),
                 layertreejson: JSON.stringify(layerTreeJson),
-                //jsonmap: JSON.stringify(allSeries[0].data)
+                jsonmap: JSON.stringify(allSeries[0].data)
             },
             success: function(result){
                 if(result == "success"){
