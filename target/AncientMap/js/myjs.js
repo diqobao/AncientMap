@@ -201,6 +201,7 @@ var myChart;//echart实例
 var bmap;//百度地图实例
 var preZoomLevel;//开始时的缩放级别
 var layerTreeJson = [{"id":"layerFather","text":"Layers"}];
+var uploadResult;
 var mapStyleJson =   [
     {
         "featureType": "land",
@@ -3354,7 +3355,9 @@ $(document).ready(function() {
                 centery: bmap.getBounds().getCenter().lat,
                 zoomlevel: bmap.getZoom(),
                 layertreejson: JSON.stringify(layerTreeJson),
-                jsonmap: JSON.stringify(allSeries[0].data)
+                // jsonmap: JSON.stringify(allSeries[0].data)
+                jsonmap: uploadResult
+
             },
             success: function(result){
                 if(result == "success"){
@@ -3418,7 +3421,8 @@ $(document).ready(function() {
                 if (result != "failed") {
                     var jsonfile = JSON.parse(result);
                     var output = convertData(jsonfile);
-                    // $.messager.alert("Message2", JSON.stringify(jsonfile));
+                    uploadResult = JSON.stringify(output);
+                    $.messager.alert("Message", uploadResult);
                     $.messager.alert("Message", "Upload Success");
                 } else {
                     $.messager.alert("Message", "Upload Failed");
