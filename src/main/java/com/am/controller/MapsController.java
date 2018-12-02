@@ -28,18 +28,19 @@ public class MapsController {
 //		String result = mapsService.updateMap(map);
 //		return result;
 //	}
-	@RequestMapping(value = "/mapSave.action"/*,consumes = "application/json"*/)
+	@RequestMapping(value = "/mapSave.action", method = RequestMethod.POST/*,consumes = "application/json"*/)
 	@ResponseBody
-	public String mapSave(Maps map, HttpSession session) throws Exception {
+	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonMap,HttpSession session, HttpServletRequest request) throws Exception {
 		//This line is useless
 		//map.setMapname((String)session.getAttribute("mapname"));
 		map.setUserid((int)session.getAttribute("id"));
+		map.setJsonMap(jsonMap);
 		String result;
 		if(mapsService.findMapByMapName(map).size()!=0) {
 			result = mapsService.updateMap(map);
 		}
 		else {
-			result = mapsService.createMap(map)+session.getAttribute("jsonmap");
+			result = mapsService.createMap(map)+"JsonMap: "+map.getJsonMap();
 		}
 		return result;
 	}

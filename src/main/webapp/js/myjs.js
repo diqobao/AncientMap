@@ -3144,13 +3144,24 @@ $(document).ready(function() {
             }
         })
     })
+
+    // $.ajax({
+    //     url : ctx + "/unlock.do",
+    //     type : "POST",
+    //     data : data,
+    //     dataType: 'json',
+    //     success : function(result) {
+    //         console.log(result);
+    //     }
+    // });
+
     //实现保存地图参数的功能，包括中心点(x/y),zoomlevel,basemap,layertreejson
     $('#save_map').bind('click',function(){
         $.ajax({
         	url:"./mapSave.action",
         	async:true,
             type:"post",
-            dataType:"text",
+            dataType:"json",
             //headers:{"Content-Type":"application/json;charset=UTF-8"},
             //contentType:"application/json; charset=utf-8",
             data: {
@@ -3159,8 +3170,12 @@ $(document).ready(function() {
                 centery: bmap.getBounds().getCenter().lat,
                 zoomlevel: bmap.getZoom(),
                 layertreejson: JSON.stringify(layerTreeJson),
-                //jsonmap: JSON.stringify(allSeries[0].data)
+                jsonmap: JSON.stringify(allSeries[0].data)
             },
+            // data: {
+        	//     name: "test1",
+            //     password: "llll"
+            // },
             success: function(result){
                 if(result == "success"){
                 	 $.messager.alert("Message","Save Success");
