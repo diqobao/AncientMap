@@ -37,19 +37,19 @@ public class MapsController {
 //		String result = mapsService.updateMap(map);
 //		return result;
 //	}
-	@RequestMapping(value = "/mapSave.action", method = RequestMethod.POST/*,consumes = "application/json"*/)
+	@RequestMapping(value = "/mapSave.action"/*,consumes = "application/json"*/)
 	@ResponseBody
-	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonMap,HttpSession session, HttpServletRequest request) throws Exception {
+	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonmap,HttpSession session) throws Exception {
 		//This line is useless
 		//map.setMapname((String)session.getAttribute("mapname"));
 		map.setUserid((int)session.getAttribute("id"));
-		map.setJsonMap(jsonMap);
+		map.setJsonMap(jsonmap);
 		String result;
 		if(mapsService.findMapByMapName(map).size()!=0) {
 			result = mapsService.updateMap(map);
 		}
 		else {
-			result = mapsService.createMap(map)+"JsonMap: "+map.getJsonMap();
+			result = mapsService.createMap(map)+session.getAttribute("jsonmap");
 		}
 		return result;
 	}
