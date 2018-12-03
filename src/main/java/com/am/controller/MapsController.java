@@ -45,19 +45,19 @@ public class MapsController {
 		map.setUserid((int)session.getAttribute("id"));
 		map.setJsonMap(jsonmap); map.setLayertreejson(layertreejson);
 		String result;
-//		if(mapsService.findMapByMapName(map).size()!=0) {
-//			result = mapsService.updateMap(map);
-//		}
-//		else {
-//			result = mapsService.createMap(map);
-//		}
-		result = mapsService.createMap(map);
+		if(mapsService.findMapByMapName(map).size()!=0) {
+			result = mapsService.updateMap(map);
+		}
+		else {
+			result = mapsService.createMap(map);
+		}
+		//result = mapsService.createMap(map);
 		return result;
 	}
 
 	@RequestMapping(value = "/mapDelete.action"/*,consumes = "application/json"*/)
 	@ResponseBody
-	public String mapDelte(Maps map, @RequestParam("mapname") String mapname,  HttpSession session) throws Exception {
+	public String mapDelete(Maps map, @RequestParam("mapname") String mapname,  HttpSession session) throws Exception {
 		//This line is useless
 		//map.setMapname((String)session.getAttribute("mapname"));
 		map.setUserid((int)session.getAttribute("id"));

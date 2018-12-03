@@ -52,35 +52,35 @@
         <%session.removeAttribute("username"); }%>
     </div>
     <div data-options="region:'south',split:true" style="height:50px;"></div>
-    <div data-options="region:'east',title:'East',split:true" style="width:200px;overflow:hidden">
-        <table title="file_treegrid" class="easyui-treegrid" style="width:200px;height:250px"
-               data-options="
-                method: 'get',
-                rownumbers: true,
-                idField: 'id',
-                treeField: 'name'
-            ">
-            <thead>
-            <tr>
-                <th data-options="field:'name'" width="50">Name</th>
-                <th data-options="field:'size'" width="50" >Size</th>
-                <th data-options="field:'date'" width="100"align="left">Modified Date</th>
-            </tr>
-            </thead>
-        </table>
-        <div class="easyui-panel" style="padding:5px;height:100%">
-            <a id="addTop5" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加涟漪</a>
-            <a id="addEmploy" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加雇佣</a>
-            <a id="addCity" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加作者城市分布数据</a>
-            <a id="drawTimeSeries" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">绘制时间序列图</a>
-            <ul id="layerTree" class="easyui-tree" onlyLeafCheck="true" dnd="true">
-                <li id="layerFather">
-                    <span>Layers</span>
-                    <ul></ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <%--<div data-options="region:'east',title:'East',split:true" style="width:200px;overflow:hidden">--%>
+        <%--<table title="file_treegrid" class="easyui-treegrid" style="width:200px;height:250px"--%>
+               <%--data-options="--%>
+                <%--method: 'get',--%>
+                <%--rownumbers: true,--%>
+                <%--idField: 'id',--%>
+                <%--treeField: 'name'--%>
+            <%--">--%>
+            <%--<thead>--%>
+            <%--<tr>--%>
+                <%--<th data-options="field:'name'" width="50">Name</th>--%>
+                <%--<th data-options="field:'size'" width="50" >Size</th>--%>
+                <%--<th data-options="field:'date'" width="100"align="left">Modified Date</th>--%>
+            <%--</tr>--%>
+            <%--</thead>--%>
+        <%--</table>--%>
+        <%--<div class="easyui-panel" style="padding:5px;height:100%">--%>
+            <%--<a id="addTop5" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加涟漪</a>--%>
+            <%--<a id="addEmploy" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加雇佣</a>--%>
+            <%--<a id="addCity" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">添加作者城市分布数据</a>--%>
+            <%--<a id="drawTimeSeries" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">绘制时间序列图</a>--%>
+            <%--<ul id="layerTree" class="easyui-tree" onlyLeafCheck="true" dnd="true">--%>
+                <%--<li id="layerFather">--%>
+                    <%--<span>Layers</span>--%>
+                    <%--<ul></ul>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div data-options="region:'west',title:'West',split:true" style="width:200px;">
         <!-- Create accordion via markup, add 'easyui-accordion' class to <div/> markup. -->
         <div class="easyui-accordion" data-options="fit:true,border:false">
@@ -128,16 +128,18 @@
                 </form>
             </div>
             <div title="Maps" style="padding:10px">
-                <p>Save map center and zoom level</p>
+                <p>Save map</p>
                 <a href="javascript:void(0)" class="easyui-linkbutton" id= "save_map"  data-options="iconCls:'icon-save'" style="width:90px">Save</a>
                 <br/>
-                <p>Name</p>
+                <%--<p>Name</p>--%>
                 <a href="javascript:void(0)" class="easyui-linkbutton" id= "find_map"  data-options="iconCls:'icon-mini-refresh'" style="width:90px">Load List</a>
                 <br/>
                 <select class="easyui-combobox" id="mapSelect" label="Maps:" labelPosition="top" style="width:100%;">
                 </select>
                 <p>Upload New Map</p>
                 <a id="upload" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:90px">Upload</a>
+                <p>Delete Current Map</p>
+                <a id="delete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="width:90px">Delete</a>
             </div>
         </div>
     </div>
@@ -168,16 +170,13 @@
                     </thead>
                 </table>
                 <table class="easyui-datagrid"
-                       data-options="url:'./data/datagrid_data.json',method:'get',
-							singleSelect:true,fit:true,fitColumns:true">
+                       data-options="url:'./data/datagrid_data.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
                     <thead>
                     <tr>
-                        <th data-options="field:'itemid'" width="80">Item ID</th>
-                        <th data-options="field:'productid'" width="100">Product ID</th>
-                        <th data-options="field:'listprice',align:'right'" width="80">List Price</th>
-                        <th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
-                        <th data-options="field:'attr1'" width="150">Attribute</th>
-                        <th data-options="field:'status',align:'center'" width="50">Status</th>
+                        <th data-options="field:'name'" width="80">Name</th>
+                        <th data-options="field:'value'" width="100">Value</th>
+                        <th data-options="field:'centerx',align:'right'" width="80">CenterX</th>
+                        <th data-options="field:'centery',align:'right'" width="80">CenterY</th>
                     </tr>
                     </thead>
                 </table>
@@ -231,11 +230,14 @@
     </div>
 </div>
 
-<!-- 图层树右键菜单 -->
-<div id="layerMenu" class="easyui-menu" style="width:120px;">
-    <div id="changeStyle" data-options="iconCls:'icon-edit'">Style</div>
-    <div id="removeLayer" data-options="iconCls:'icon-no'">Remove</div>
-</div>
+<%--Delete Window--%>
+
+
+<%--<!-- 图层树右键菜单 -->--%>
+<%--<div id="layerMenu" class="easyui-menu" style="width:120px;">--%>
+    <%--<div id="changeStyle" data-options="iconCls:'icon-edit'">Style</div>--%>
+    <%--<div id="removeLayer" data-options="iconCls:'icon-no'">Remove</div>--%>
+<%--</div>--%>
 
 <!-- 自定义样式窗口 -->
 <div id="style" class="easyui-window" title="样式设计" data-options="minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px">
