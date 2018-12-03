@@ -3368,7 +3368,6 @@ $(document).ready(function() {
     });
     //实现保存地图参数的功能，包括中心点(x/y),zoomlevel,basemap,layertreejson
     $('#save_map').bind('click',function(){
-        allSeries
         $.ajax({
         	url:"./mapSave.action",
         	async:true,
@@ -3412,13 +3411,13 @@ $(document).ready(function() {
     $('#upload_map').bind('click',function() {
         // var file = document.getElementById('file').files[0];
         var file = $("input[name=file]")[0].files[0];
+
         if (file == null) {
             alert('Error');
             return;
         }
         var fileName = file.name;
         var file_typename = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
-
         if (file_typename == '.csv') {
             var fileSize = 0;
             fileSize = Math.round(file.size * 100 / (1024 * 1024)) / 100;
@@ -3445,17 +3444,21 @@ $(document).ready(function() {
             // dataType: "json",
             success: function (result) {
                 if (result != "failed") {
+                    $.messager.alert("Message0", result);
                     var jsonfile = JSON.parse(result);
                     var output = convertData(jsonfile);
-                    uploadResult = JSON.parse(output);
+                    // uploadResult = JSON.stringify(output);
+                    $.messager.alert("Message1", uploadResult);
+
                     //After upload, refresh
-                    allSeries[0].data = uploadResult;
+                    allSeries[0].data = output;
+                    // allSeries[0].data = result;
                     currentSeries.push(allSeries[0]);
                     option.series = currentSeries;
-                    myChart.setOption(option,true);
+                    myChart.setOption(option, true);
                     resetBmap();
 
-                    $.messager.alert("Message", uploadResult);
+                    // $.messager.alert("Message", uploadResult);
                     $.messager.alert("Message", "Upload Success");
                     //window.location.reload();
                 } else {
@@ -4117,7 +4120,7 @@ function createApi(){
 //  for(var i=0;i<people_level.length;i++){
 //    array_search.push(people_level[i][0]);
 //  }
-    var inputValue=array_search;  
+    var inputValue=array_search;
     if(!autoComplete){  
        autoComplete = new AutoComplete('p_apiName','auto',inputValue);//第一个参数是输入框id，第二个是下拉显示的id，第三个是获取的全部数据。  
     }  
