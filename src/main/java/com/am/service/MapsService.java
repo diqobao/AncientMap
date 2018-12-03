@@ -14,4 +14,5 @@ public interface MapsService {
 		public String createMap(Maps map) throws Exception;
 		public List<String> findMapByMapName(Maps map) throws Exception;
 		public String upLoadMap(MultipartFile file) throws Exception;
+		public String deleteMap(Maps map) throws Exception;
 }

@@ -16,4 +16,5 @@ public interface MapsMapper {
 	public List<String> findMapsByMapName(Maps map) throws Exception;
 	public String findLayerTreeByMaps(Maps map) throws Exception;
 	public void createMap(Maps map) throws Exception;
+	public void deleteMap(Maps map) throws Exception;
 }
