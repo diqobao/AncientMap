@@ -6,11 +6,9 @@ public class Maps {
 	private int id; 
 	private String mapname;
 	private int userid;
-	private Boolean accessibility;
 	private float centerx;
 	private float centery;
 	private int zoomlevel;
-	private String layertreejson;
 	private String jsonmap;
 
 	public int getId() {
@@ -29,12 +27,7 @@ public class Maps {
 		return userid;
 	}
 	public void setUserid(int userid) { this.userid = userid; }
-	public Boolean getAccessibility() {
-		return accessibility;
-	}
-	public void setAccessibility(Boolean accessibility) {
-		this.accessibility = accessibility;
-	}
+
 	public float getCenterx() {
 		return centerx;
 	}
@@ -52,12 +45,6 @@ public class Maps {
 	}
 	public void setZoomlevel(int zoomlevel) {
 		this.zoomlevel = zoomlevel;
-	}
-	public String getLayertreejson() {
-		return layertreejson;
-	}
-	public void setLayertreejson(String layertreejson) {
-		this.layertreejson = layertreejson;
 	}
     public String getJsonMap() { return jsonmap;}
     public void setJsonMap(String jsonMap) {this.jsonmap = jsonMap;}
