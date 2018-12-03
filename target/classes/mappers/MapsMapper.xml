@@ -18,7 +18,12 @@
 		INSERT INTO MAPS(MapName,userId,accessibility,centerx,centery,zoomLevel,LayerTreejson,JsonMap)
 		VALUES (#{mapname},#{userid},#{accessibility},#{centerx},#{centery},#{zoomlevel},#{layertreejson},#{jsonmap})
 	</insert>
-
+	<delete id="deleteMap" parameterType="com.am.pojo.Maps">
+	  	DELETE FROM MAPS
+	  	<where>
+			MAPNAME=#{mapname} AND USERID=#{userid}
+		</where>
+	</delete>
 	<select id="findMapsByUserid" parameterType="int" resultType="String">
 		SELECT MAPNAME FROM MAPS 
 		<where>
@@ -37,4 +42,5 @@
 			USERID =#{userid} AND MAPNAME =#{mapname}
 		</where>
 	</select>
+
 </mapper>

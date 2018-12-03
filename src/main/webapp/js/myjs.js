@@ -3477,17 +3477,14 @@ $(document).ready(function() {
                     var jsonfile = JSON.parse(result);
                     var output = convertData(jsonfile);
                     // uploadResult = JSON.stringify(output);
-                    $.messager.alert("Message1", uploadResult);
 
                     //After upload, refresh
                     allSeries[0].data = output;
-                    // allSeries[0].data = result;
                     currentSeries.push(allSeries[0]);
                     option.series = currentSeries;
                     myChart.setOption(option, true);
                     resetBmap();
 
-                    // $.messager.alert("Message", uploadResult);
                     $.messager.alert("Message", "Upload Success");
                     //window.location.reload();
                 } else {

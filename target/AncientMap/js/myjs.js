@@ -3358,7 +3358,7 @@ $(document).ready(function() {
 	
 	                    $("#mapSelect").combobox('loadData',options);
 	                    $("#mapSelect").combobox('select', options[0].value);
-					 	$.messager.alert("Message","Map Loading Sucess!");
+					 	//$.messager.alert("Message","Map Loading Sucess!");
 	                }
 	                else{
 	                    $.messager.alert("Message","You have not create any map!");
@@ -3399,6 +3399,35 @@ $(document).ready(function() {
                 }
             }
         })
+    });
+
+    $('#delete').linkbutton({
+        onClick:function(){
+            $.messager.confirm('Delete', 'Are you confirm this?', function(r){
+                if (r){
+                    //alert('confirmed: '+r);
+                    $.ajax({
+                        url:"./mapDelete.action",
+                        async:true,
+                        type:"post",
+                        dataType:"text",
+                        //contentType:"application/json; charset=utf-8",
+                        data: {
+                            mapname: $('#mapSelect').combobox('getText')
+                        },
+                        success: function(result){
+                            if(result == "success"){
+                                //$.messager.alert("Message","Delete Success");
+                                $('#find_map').click();
+                            }
+                            else{
+                                $.messager.alert("Message","Delete Failed");
+                            }
+                        }
+                    })
+                }
+            });
+        }
     });
 
     $('#upload').linkbutton({
@@ -3468,6 +3497,28 @@ $(document).ready(function() {
         });
 
     });
+    //加载表单
+    // $('#dg').datagrid({
+    //     url:'/mssh/init.action',
+    //     title:'CSV DataSet',
+    //     border:false,
+    //     rownumbers:true,
+    //     toolbar: '#DataGrid',
+    //     pagination: true,
+    //     fit: true,
+    //     pageSize:"5",
+    //     pageList:[5,10,15,20],
+    //     editorHeight: "100",
+    //     striped: "true",
+    //     singleSelect: true,
+    //     displayMsg: 'Row# {from} - {to}   {total} Rows',
+    //     columns:[[
+    //         {field:'id',title:'学号',width:120},
+    //         {field:'name',title:'姓名',width:120},
+    //         {field:'password',title:'密码',width:120},
+    //         {field:'isban',title:'启禁',width:50}
+    //     ]]
+    // });
 
     //更新选定地图
     $('#mapSelect').combobox({
@@ -3488,7 +3539,7 @@ $(document).ready(function() {
                         allSeries[0].data = tmpJson;
                         currentSeries.push(allSeries[0]);
                     }
-                    $.messager.alert("Message","Load old map Success");
+                    //$.messager.alert("Message","Load old map Success");
                     option.series = currentSeries;
                     myChart.setOption(option,true);
                     resetBmap();
@@ -3573,8 +3624,8 @@ $(document).ready(function() {
     //添加平移缩放控件
     bmap.addControl(new BMap.NavigationControl());
     //添加缩放监听
-    bmap.addEventListener("zoomstart", mapZoomStart);
-    bmap.addEventListener("zoomend", mapZoomEnd);
+    // bmap.addEventListener("zoomstart", mapZoomStart);
+    // bmap.addEventListener("zoomend", mapZoomEnd);
     bmap.setMinZoom(5);//设置地图最小缩放级别
     bmap.setMaxZoom(16);//设置地图最大缩放级别
     //添加移动监听
