@@ -3469,7 +3469,7 @@ $(document).ready(function() {
             // dataType: "json",
             success: function (result) {
                 if (result != "failed") {
-                    $.messager.alert("Message0", result);
+                    // $.messager.alert("Message0", result);
                     var jsonfile = JSON.parse(result);
                     var output = convertData(jsonfile);
                     // uploadResult = JSON.stringify(output);
