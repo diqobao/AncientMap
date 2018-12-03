@@ -40,8 +40,6 @@ public class MapsController {
 	@RequestMapping(value = "/mapSave.action"/*,consumes = "application/json"*/)
 	@ResponseBody
 	public String mapSave(Maps map, @RequestParam("jsonmap") String jsonmap,  HttpSession session) throws Exception {
-		//This line is useless
-		//map.setMapname((String)session.getAttribute("mapname"));
 		map.setUserid((int)session.getAttribute("id"));
 		map.setJsonMap(jsonmap);
 		String result;

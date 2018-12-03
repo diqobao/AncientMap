@@ -3377,7 +3377,6 @@ $(document).ready(function() {
             	centerx: bmap.getBounds().getCenter().lng,
                 centery: bmap.getBounds().getCenter().lat,
                 zoomlevel: bmap.getZoom(),
-                layertreejson: JSON.stringify(layerTreeJson),
                 jsonmap: JSON.stringify(allSeries[0].data)
                 //jsonmap: uploadResult
             },
@@ -3385,15 +3384,15 @@ $(document).ready(function() {
                 if(result == "success"){
                 	 $.messager.alert("Message","Save Success");
                 }
-                else if(result=="failed"){
+                else {
                     $.messager.alert("Message","Save Failed");
                 }
                 //It's the code for return back status info for debug purpose
-                else
-                {
-                    $.messager.alert("Message",result);
-                    $.messager.alert("Json",JSON.stringify(allSeries[0]));
-                }
+                // else
+                // {
+                //     $.messager.alert("Message",result);
+                //     $.messager.alert("Json",JSON.stringify(allSeries[0]));
+                // }
             }
         })
     });

@@ -7,7 +7,6 @@
 			<if test="centerx != null"> CENTERX=#{centerx},</if>
 			<if test="centery != null">CENTERY=#{centery},</if>
 			<if test="zoomlevel != null">ZOOMLEVEL=#{zoomlevel},</if>
-			<if test="layertreejson != null">LAYERTREEJSON=#{layertreejson},</if>
 			<if test="jsonmap != null">JSONMAP=#{jsonmap}</if>
 		</set>
 		<where>
@@ -15,8 +14,8 @@
 		</where>
 	</update>
 	<insert id="createMap" parameterType="com.am.pojo.Maps">
-		INSERT INTO MAPS(MapName,userId,accessibility,centerx,centery,zoomLevel,LayerTreejson,JsonMap)
-		VALUES (#{mapname},#{userid},#{accessibility},#{centerx},#{centery},#{zoomlevel},#{layertreejson},#{jsonmap})
+		INSERT INTO MAPS(MapName,userId,centerx,centery,zoomLevel,JsonMap)
+		VALUES (#{mapname},#{userid},#{centerx},#{centery},#{zoomlevel},#{jsonmap})
 	</insert>
 	<delete id="deleteMap" parameterType="com.am.pojo.Maps">
 	  	DELETE FROM MAPS
