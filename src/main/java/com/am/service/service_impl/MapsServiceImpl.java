@@ -56,4 +56,10 @@ public class MapsServiceImpl implements MapsService{
 		String output = parser.csv2json();
 		return output;
 	}
+
+	public String deleteMap(Maps map) throws Exception
+	{
+		mapsMapper.deleteMap(map);
+		return "success";
+	}
 }
